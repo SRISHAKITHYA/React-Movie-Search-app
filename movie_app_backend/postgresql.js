@@ -11,7 +11,12 @@ export const sequelize = new Sequelize(
     dialect: "postgres",
     logging: false,
     port: config.port,
-    ssl: false,
+    ssl: true,
+    dialectOptions: {
+      ssl: {
+        require: true,
+      },
+    },
   }
 );
 sequelize
