@@ -34,7 +34,7 @@ app.use(
 );
 
 const corsOptions = {
-  origin: "https://filmfiestaapp.netlify.app/",
+  origin: "https://66430cead72ee6a12dd63686--filmfiestaapp.netlify.app",
 };
 
 app.use(cors(corsOptions));
