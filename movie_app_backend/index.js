@@ -33,7 +33,12 @@ app.use(
   })
 );
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://filmfiestaapp.netlify.app/",
+};
+
+app.use(cors(corsOptions));
+
 const Movie = movieModel(sequelize);
 const Movieinfo = movieInfoModel(sequelize);
 const Watchlist = watchlistModel(sequelize);
