@@ -32,12 +32,16 @@ app.use(
     saveUnintialized: "false",
   })
 );
-
 const corsOptions = {
-  origin: "https://66430cead72ee6a12dd63686--filmfiestaapp.netlify.app",
+  origin: "https://filmfiestaapp.netlify.app",
+  methods: ["GET", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 const Movie = movieModel(sequelize);
 const Movieinfo = movieInfoModel(sequelize);
