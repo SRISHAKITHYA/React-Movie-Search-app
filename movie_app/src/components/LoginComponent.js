@@ -121,10 +121,13 @@ const LoginComponent = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3030/api/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://react-movie-search-app-rmk4.onrender.com/api/login",
+        {
+          username,
+          password,
+        }
+      );
       console.log(response.data);
       setIsLoggedIn(true);
       setShowSnackbar(true);
@@ -136,10 +139,13 @@ const LoginComponent = () => {
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3030/api/signup", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://react-movie-search-app-rmk4.onrender.com/api/signup",
+        {
+          username,
+          password,
+        }
+      );
       console.log(response.data);
       setShowSnackbar(true);
       setUsername("");

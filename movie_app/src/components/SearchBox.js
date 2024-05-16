@@ -30,7 +30,7 @@ const SearchBoxComponent = ({ onSearch }) => {
 
   const fetchData = async (SearchInput) => {
     const response =
-      await axios.get(`http://localhost:3030/api/search?searchTerm=${SearchInput}
+      await axios.get(`https://react-movie-search-app-rmk4.onrender.com/api/search?searchTerm=${SearchInput}
       
     
 `);

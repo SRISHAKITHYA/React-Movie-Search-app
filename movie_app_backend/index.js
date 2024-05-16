@@ -28,8 +28,8 @@ const secretKey = generateRandomString(64);
 app.use(
   session({
     secret: secretKey,
-    resave: "false",
-    saveUnintialized: "false",
+    resave: false,
+    saveUnintialized: false,
   })
 );
 const corsOptions = {

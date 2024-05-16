@@ -81,7 +81,9 @@ const MovieInfoComponent = (props) => {
 
   const updateWatchlist = () => {
     if (addedToWatchlist) {
-      Axios.delete(`http://localhost:3030/api/watchlist/${selectedMovie}`)
+      Axios.delete(
+        `https://react-movie-search-app-rmk4.onrender.com/api/watchlist/${selectedMovie}`
+      )
         .then(() => {
           setAddedToWatchlist(false);
         })

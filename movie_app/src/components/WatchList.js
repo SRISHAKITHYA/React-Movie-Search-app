@@ -68,7 +68,9 @@ const WatchlistComponent = (props) => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(`http://localhost:3030/api/watchlist`);
+        const response = await fetch(
+          `https://react-movie-search-app-rmk4.onrender.com/api/watchlist`
+        );
 
         console.log(response);
 
