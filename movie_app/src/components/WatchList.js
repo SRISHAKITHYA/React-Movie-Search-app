@@ -18,7 +18,6 @@ const CoverImage = styled.img`
 const MovieContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   padding: 10px;
   width: 280px;
   box-shadow: 0 3px 10px 0 #aaa;
@@ -29,6 +28,25 @@ const InfoColumn = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center; /* Align items vertically */
+`;
+const PlayButton = styled.button`
+  background-color: green;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: darkgreen;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const MovieInfo = styled.span`
@@ -37,28 +55,20 @@ const MovieInfo = styled.span`
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
-  text-tranform: capitalize;
+  text-transform: capitalize;
 `;
 
 const MovieListContainer = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 24px;
   padding: 30px;
   justify-content: space-evenly;
 `;
-
-const SelectedMovieContainer = styled.div`
-  flex: 1;
-`;
-
-const PlaylistContainer = styled.div`
-  flex: 1;
-`;
 const Heading = styled.div`
-  display: flex;
-  justify-content: center;
+  font-style: bold;
+  font-size: 20px;
+  text-align: center;
 `;
 
 const WatchlistComponent = (props) => {
@@ -72,14 +82,11 @@ const WatchlistComponent = (props) => {
           `https://react-movie-search-app-rmk4.onrender.com/api/watchlist`
         );
 
-        console.log(response);
-
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const data = await response.json();
-        console.log(data);
         setWatchlistMovies(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -91,38 +98,31 @@ const WatchlistComponent = (props) => {
     setSelectedMovie(movie);
   };
 
+  const handlePlayButtonClick = (movie) => {
+    console.log(`Playing ${movie.title}`);
+  };
+
   return (
-    <div style={{ display: "flex" }}>
-      <SelectedMovieContainer>
-        {selectedMovie && (
-          <MovieContainer key={selectedMovie.imdbid} isNew={true}>
-            <CoverImage src={selectedMovie.poster}></CoverImage>
-            <MovieName>{selectedMovie.title}</MovieName>
+    <>
+      <Heading>Play the movie from your picks, Happy Watching!</Heading>
+      <MovieListContainer>
+        {watchlistMovies.map((movie, index) => (
+          <MovieContainer
+            key={movie.imdbid}
+            onClick={() => handleMovieClick(movie)}
+          >
+            <CoverImage src={movie.poster}></CoverImage>
+            <MovieName>{movie.title}</MovieName>
             <InfoColumn>
-              <MovieInfo>Year: {selectedMovie.year}</MovieInfo>
+              <MovieInfo>Year: {movie.year}</MovieInfo>
+              <PlayButton onClick={() => handlePlayButtonClick(movie)}>
+                Play
+              </PlayButton>
             </InfoColumn>
           </MovieContainer>
-        )}
-      </SelectedMovieContainer>
-      <PlaylistContainer>
-        <Heading>Select a movie from your picks to stream it </Heading>
-        <MovieListContainer>
-          {watchlistMovies.map((movie, index) => (
-            <MovieContainer
-              key={movie.imdbid}
-              isNew={index === watchlistMovies.length - 1}
-              onClick={() => handleMovieClick(movie)}
-            >
-              <CoverImage src={movie.poster}></CoverImage>
-              <MovieName>{movie.title}</MovieName>
-              <InfoColumn>
-                <MovieInfo>Year: {movie.year}</MovieInfo>
-              </InfoColumn>
-            </MovieContainer>
-          ))}
-        </MovieListContainer>
-      </PlaylistContainer>
-    </div>
+        ))}
+      </MovieListContainer>
+    </>
   );
 };
 
