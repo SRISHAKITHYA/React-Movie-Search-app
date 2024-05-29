@@ -73,7 +73,6 @@ const Heading = styled.div`
 
 const WatchlistComponent = (props) => {
   const [watchlistMovies, setWatchlistMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -94,10 +93,6 @@ const WatchlistComponent = (props) => {
     })();
   }, []);
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
   const handlePlayButtonClick = (movie) => {
     console.log(`Playing ${movie.title}`);
   };
@@ -106,11 +101,8 @@ const WatchlistComponent = (props) => {
     <>
       <Heading>Play the movie from your picks, Happy Watching!</Heading>
       <MovieListContainer>
-        {watchlistMovies.map((movie, index) => (
-          <MovieContainer
-            key={movie.imdbid}
-            onClick={() => handleMovieClick(movie)}
-          >
+        {watchlistMovies.map((movie) => (
+          <MovieContainer key={movie.imdbid}>
             <CoverImage src={movie.poster}></CoverImage>
             <MovieName>{movie.title}</MovieName>
             <InfoColumn>
