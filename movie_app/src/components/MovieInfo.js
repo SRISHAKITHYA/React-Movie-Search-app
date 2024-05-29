@@ -91,12 +91,15 @@ const MovieInfoComponent = (props) => {
           console.error("Error removing movie from watchlist:", error);
         });
     } else {
-      Axios.post("http://localhost:3030/api/watchlist", {
-        imdbid: selectedMovie,
-        title: movieInfo.title,
-        year: movieInfo.year,
-        poster: movieInfo.poster,
-      })
+      Axios.post(
+        `https://react-movie-search-app-rmk4.onrender.com/api/watchlist`,
+        {
+          imdbid: selectedMovie,
+          title: movieInfo.title,
+          year: movieInfo.year,
+          poster: movieInfo.poster,
+        }
+      )
         .then(() => {
           setAddedToWatchlist(true);
         })
@@ -107,7 +110,9 @@ const MovieInfoComponent = (props) => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3030/api/movie/${selectedMovie}`)
+    Axios.get(
+      `https://react-movie-search-app-rmk4.onrender.com/api/movie/${selectedMovie}`
+    )
       .then((response) => {
         setMovieInfo(response.data);
         setAddedToWatchlist(response.data.isInWatchlist);
